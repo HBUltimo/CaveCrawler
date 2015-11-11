@@ -22,6 +22,30 @@ public class Driver
 		Player thePlayer = new Player("The Follower");
 		caveEntrance.addThePlayer(thePlayer);
 		*/
+		
+		{
+			for(int i = 0; i < theJSON.length(); i++)
+			{
+				if(theJSON.charAt(i) == '{')
+				{
+					System.out.println("JSONObject begin");
+				}
+
+				else if(theJSON.charAt(i) == '[')
+				{
+					System.out.println("JSONArray begin");
+				}
+				
+				else if(theJSON.charAt(i) == '{')
+				{
+					System.out.println("JSONObject end");
+				}
+				
+				else if(theJSON.charAt(i) == ']')
+				{
+					System.out.println("JSONArray end");
+				}
+			}
+		}	
 	}
-	
-}
+}	

@@ -12,32 +12,22 @@ public class CaveParser
 	{
 		for(int i = 0; i < this.theJSON.length(); i++)
 		{
-			if(theJSON.indexOf('{') != -1)
+			if(theJSON.charAt(i) == '{')
 			{
 				System.out.println("JSONObject begin");
 			}
-			
-		}
-		
-		for(int i = 0; i < this.theJSON.length(); i++)
-		{
-			if(theJSON.indexOf('[') != -1)
+
+			else if(theJSON.charAt(i) == '[')
 			{
 				System.out.println("JSONArray begin");
 			}
-		}
-		
-		for(int i =0; i < this.theJSON.length(); i++)
-		{
-			if(theJSON.indexOf('}') != -1)
+			
+			else if(theJSON.charAt(i) == '{')
 			{
 				System.out.println("JSONObject end");
 			}
-		}
-		
-		for(int i = 0; i < this.theJSON.length(); i++)
-		{
-			if(theJSON.indexOf(']') != -1)
+			
+			else if(theJSON.charAt(i) == ']')
 			{
 				System.out.println("JSONArray end");
 			}
