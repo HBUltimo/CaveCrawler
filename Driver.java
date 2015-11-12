@@ -4,15 +4,10 @@ import java.util.Scanner;
 
 public class Driver 
 {
-	public static void main(String[] args) throws Exception
+	public static void main(String[] args)
 	{
-		Scanner input = new Scanner(new File(System.getProperty("user.dir") + "/src/caveJSON"));
-		String theJSON = "";
-		while(input.hasNextLine())
-		{
-			theJSON = theJSON + input.nextLine();
-		}
-		System.out.println(theJSON);
+		CaveParser cp = new CaveParser("simpleJSON");
+		cp.parse();
 		/*
 		Room caveEntrance = new Room("The Cave Entrance");
 		Room room2 = new Room("Room #2");
@@ -22,30 +17,6 @@ public class Driver
 		Player thePlayer = new Player("The Follower");
 		caveEntrance.addThePlayer(thePlayer);
 		*/
-		
-		{
-			for(int i = 0; i < theJSON.length(); i++)
-			{
-				if(theJSON.charAt(i) == '{')
-				{
-					System.out.println("JSONObject begin");
-				}
-
-				else if(theJSON.charAt(i) == '[')
-				{
-					System.out.println("JSONArray begin");
-				}
-				
-				else if(theJSON.charAt(i) == '{')
-				{
-					System.out.println("JSONObject end");
-				}
-				
-				else if(theJSON.charAt(i) == ']')
-				{
-					System.out.println("JSONArray end");
-				}
-			}
-		}	
 	}
-}	
+	
+}
