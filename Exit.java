@@ -1,4 +1,3 @@
-
 public class Exit 
 {
 	private String name;

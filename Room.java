@@ -1,4 +1,3 @@
-
 public class Room 
 {
 	private Exit[] theExits;
