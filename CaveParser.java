@@ -112,25 +112,22 @@ public class CaveParser
 		answer = answer.trim();
 		return Integer.parseInt(answer);
 	}
-		
-	private JSONArray getArrayValue()
+	
+	//return true if a occurs next before b
+	private boolean charBeforechar(char a, char b)
 	{
-		while(this.currPos < this.theJSON.length())
+		for(int i = this.currPos; i < this.theJSON.length(); i++)
 		{
-			this.advanceToNextChar('[');
-			JSONArray theArray = new JSONArray();
-			theArray.addVariable(this.getVariable());
-			
-			while(this.exists(','))
+			if(this.theJSON.charAt(i) == b)
 			{
-				this.advanceToNextChar(',');
-				theArray.addVariable(this.getVariable());
+				return false;
 			}
-			this.advancePastNextChar(']');
-			return theArray;
+			else if(this.theJSON.charAt(i) == a)
+			{
+				return true;
+			}
 		}
-		
-		return null;
+		return false;
 	}
 	
 	private JSONObject getObjectValue()
@@ -141,7 +138,7 @@ public class CaveParser
 			JSONObject theObject = new JSONObject();
 			theObject.addVariable(this.getVariable());
 			
-			while(this.exists(','))
+			while(this.charBeforechar(',', '}'))
 			{
 				this.advanceToNextChar(',');
 				theObject.addVariable(this.getVariable());
@@ -186,9 +183,23 @@ public class CaveParser
 		}
 		else if(type.equals("Array"))
 		{
-			JSONArrayVariable theVariable = new JSONArrayVariable(name, this.getArrayValue());
-			return theVariable; 
+			JSONArrayVariable theVariable = new JSONArrayVariable(name);
+			while(this.currPos < this.theJSON.length())
+			{
+				this.advanceToNextChar('[');
+				theVariable.addJSONObject(this.getObjectValue());
+				
+				while(this.charBeforechar(',', ']'))
+				{
+					this.advanceToNextChar(',');
+					theVariable.addJSONObject(this.getObjectValue());
+				}
+				this.advancePastNextChar(']');
+				return theVariable;
+			}
+			
 		}
+		
 		else if(type.equals("Number"))
 		{
 			JSONNumberVariable theVariable = new JSONNumberVariable(name, this.getNumberValue());
